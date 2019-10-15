@@ -1,0 +1,70 @@
+{
+// =============================================================================
+//  settings.json: -------------------------------------------------------------
+// =============================================================================
+
+//  LaTex ----------------------------------------------------------------------
+// =============================================================================
+  
+"latex-workshop.message.error.show": false,
+"latex-workshop.latex.autoBuild.run": "onFileChange",
+"latex-workshop.intellisense.package.enabled": true,
+
+"latex-workshop.view.pdf.viewer": "tab",
+"latex-workshop.view.pdf.ref.viewer": "tabOrBrowser",
+
+"latex-workshop.synctex.afterBuild.enabled": true,
+"latex-workshop.synctex.synctexjs.enabled": true,
+
+"latex-workshop.latex.texDirs": ["%DIR%/latex/source"],
+"latex-workshop.latex.outDir": "%DIR%/latex/temp/%DOCFILE%/",
+
+"latex-workshop.latex.tools": [
+  {
+    "name": "biber", "command": "biber",
+    "args": [ "--input-directory=%DIR%/latex/temp/%DOCFILE%/", "--output-directory=%DIR%/latex/temp/%DOCFILE%/","%DOCFILE%"]
+  },
+  {
+    "name": "bibtex", "command": "bibtex",
+    "args": [ "%DOCFILE%" ]
+  },
+  {
+    "name": "dvitex", "command": "latex",
+    "args": [ "-interaction=nonstopmode", "-file-line-error",  "-output-format=dvi","%DOC%" ]
+  },
+  {
+    "name": "latexmk", "command": "latexmk",
+    "args": [ "-synctex=1", "-interaction=nonstopmode",  "-file-line-error", "-pdf", "%DOC%" ]
+  },
+  {
+    "name": "pdflatex", "command": "pdflatex",
+    "args": [ "-synctex=1",  "-interaction=nonstopmode", "-file-line-error","-output-directory=latex/temp/%DOCFILE%/", "%DOC%" ]
+  }
+],
+
+"latex-workshop.latex.recipes": [
+    {
+      "name": "PdfLaTeX -> Biber", "tools": [ "pdflatex", "biber", "pdflatex" ]
+    },
+    {
+        "name": "PdfLaTeX", "tools": ["pdflatex"]
+    },
+    {
+      "name": "PdfLaTeX -> BibTeX", "tools": ["pdflatex", "bibtex", "pdflatex", "pdflatex"]
+    },
+    {
+      "name": "LaTeXmk", "tools": ["latexmk"]
+    },
+],
+"spellright.language": [
+  "de",
+  "en"
+],
+"spellright.documentTypes": [
+  "markdown",
+  "latex",
+  "plaintext"
+],
+"git.ignoreLimitWarning": true,
+
+}

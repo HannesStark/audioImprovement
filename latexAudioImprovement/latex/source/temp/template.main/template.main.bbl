@@ -1,0 +1,56 @@
+% $ biblatex auxiliary file $
+% $ biblatex bbl format version 3.0 $
+% Do not modify the above lines!
+%
+% This is an auxiliary file used by the 'biblatex' package.
+% This file may safely be deleted. It will be recreated by
+% biber as required.
+%
+\begingroup
+\makeatletter
+\@ifundefined{ver@biblatex.sty}
+  {\@latex@error
+     {Missing 'biblatex' package}
+     {The bibliography requires the 'biblatex' package.}
+      \aftergroup\endinput}
+  {}
+\endgroup
+
+
+\refsection{0}
+  \datalist[entry]{nyt/global//global/global}
+    \entry{2009-bengio-learning}{article}{}
+      \name{author}{1}{}{%
+        {{hash=40a8e4774982146adc2688546f54efb2}{%
+           family={Bengio},
+           familyi={B\bibinitperiod},
+           given={Yoshua},
+           giveni={Y\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {Now Publishers, Inc.}%
+      }
+      \strng{namehash}{40a8e4774982146adc2688546f54efb2}
+      \strng{fullhash}{40a8e4774982146adc2688546f54efb2}
+      \strng{bibnamehash}{40a8e4774982146adc2688546f54efb2}
+      \strng{authorbibnamehash}{40a8e4774982146adc2688546f54efb2}
+      \strng{authornamehash}{40a8e4774982146adc2688546f54efb2}
+      \strng{authorfullhash}{40a8e4774982146adc2688546f54efb2}
+      \field{sortinit}{B}
+      \field{sortinithash}{276475738cc058478c1677046f857703}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{year}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Foundations and trends{®} in Machine Learning}
+      \field{number}{1}
+      \field{title}{Learning deep architectures for AI}
+      \field{volume}{2}
+      \field{year}{2009}
+      \field{pages}{1\bibrangedash 127}
+      \range{pages}{127}
+    \endentry
+  \enddatalist
+\endrefsection
+\endinput
+

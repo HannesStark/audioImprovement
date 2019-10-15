@@ -1,0 +1,69 @@
+% ========================================================================================
+% -- LaTeX-Style for scientific documents
+% ========================================================================================
+
+% -- Usepackage --------------------------------------------------------------------------
+% ========================================================================================
+
+    % -- General -------------------------------------------------------------------------
+        \usepackage[ngerman]{babel}
+        \usepackage[utf8]{inputenc}
+        \usepackage[T1]{fontenc}
+        \usepackage{adjustbox, caption, tabularx, ragged2e, longtable, ltxtable, etoolbox}
+
+        \usepackage{hyperref}
+
+        \usepackage{amsmath,amssymb,bm}
+    %   TEMP -------------------------------------------------------------------
+    \usepackage{subcaption}
+    \usepackage{float}
+    \renewcommand{\labelitemii}{$\bullet$}
+
+    % -- Graphics ------------------------------------------------------------------------
+        \usepackage{graphicx}
+
+
+% -- Settings ----------------------------------------------------------------------------
+% ========================================================================================
+
+    % -- Warnings: Suppress hbox ---------------------------------------------------------
+   % -- TEWEEEEEEEEEEE---------------------------------------------------------
+   \hbadness=99999
+   \hfuzz=9999pt
+   \usepackage{csquotes}     % when using babel with biblatex, loading csquotes is recommended to ensure that quoted texts are typeset according to the rules of your main language.
+   \usepackage{multirow}
+    % -- Avoid identation of paragraph beginnings ----------------------------------------
+    \setlength{\parindent}{0in}
+
+% -- Tabular -----------------------------------------------------------------------------
+% ========================================================================================
+
+    % -- Columntype [tabularx]------------------------------------------------------------
+        % \newcolumntype{C}[1]{>{\Centering}m{#1}}
+        % \renewcommand\tabularxcolumn[1]{C{#1}}
+
+    % -- Automatic rownumber [etoolbox]---------------------------------------------------
+        \preto\tabular{\setcounter{magicrownumbers}{0}}
+        \newcounter{magicrownumbers}
+        \newcommand\rownumber{\stepcounter{magicrownumbers}\arabic{magicrownumbers}}
+
+% -- Formular ----------------------------------------------------------------------------
+% ========================================================================================
+
+    % -- Draw arrows with specific size \arrow[size] -------------------------------------
+        \newcommand{\arrow}[1][1cm]{\mathrel{%
+        \hbox{\rule[\dimexpr\fontdimen22\textfont2-.2pt\relax]{#1}{.4pt}}%
+        \mkern-4mu\hbox{\usefont{U}{lasy}{m}{n}\symbol{41}}}}
+
+    % --  Draw arrows in scripts with specific size \arrows[size] ------------------------
+        \makeatletter
+
+        \setbox0\hbox{$\xdef\scriptratio{\strip@pt\dimexpr
+            \numexpr(\sf@size*65536)/\f@size sp}$}
+
+        \newcommand{\arrows}[1][1cm]{{%
+            \hbox{\rule[\scriptratio\dimexpr\fontdimen22\textfont2-.2pt\relax]
+                    {\scriptratio\dimexpr#1\relax}{\scriptratio\dimexpr.4pt\relax}}%
+        \mkern-4mu\hbox{\let\f@size\sf@size\usefont{U}{lasy}{m}{n}\symbol{41}}}}
+
+        \makeatother

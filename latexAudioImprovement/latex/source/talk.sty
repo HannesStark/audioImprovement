@@ -1,0 +1,141 @@
+
+
+\usepackage[ngerman]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{newlfont}
+\usepackage{helvet}
+\usepackage{amsmath,amsfonts,amssymb}
+\usepackage{multimedia}
+\usepackage{ifthen}
+\usepackage{longtable}
+\usepackage{listings}
+\usepackage{algorithmic}
+\usepackage{animate}
+
+    % -- Warnings: Suppress hbox ---------------------------------------------------------
+   % -- TEWEEEEEEEEEEE---------------------------------------------------------
+   \hbadness=99999
+   \hfuzz=9999pt
+   \usepackage{csquotes}     % when using babel with biblatex, loading csquotes is recommended to ensure that quoted texts are typeset according to the rules of your main language.
+   \usepackage{multirow}
+    % -- Avoid identation of paragraph beginnings ----------------------------------------
+    \setlength{\parindent}{0in}
+
+% everything but math is san serif
+\usefonttheme[onlymath]{serif}
+
+% definitions needed for harvard style
+\newcounter{paragraph}
+\newcommand{\paragraph}
+
+
+% Bibliography
+% \usepackage{harvard}
+% \bibliographystyle{talk}
+
+% Avoids strange little icons above the text
+%\setbeamertemplate{bibliography item}[text]
+\usebibitemtemplate{\insertbiblabel}
+
+\definecolor{unibw-orange}{rgb}{0.992,0.392,0.027}
+
+% �berschriften etc. schwarz
+\setbeamercolor{structure}{fg=black}
+
+
+\setbeamersize{text margin left=5mm} 
+\setbeamersize{text margin right=3mm}
+
+
+\setbeamertemplate{frametitle}
+{\parbox{.935\paperwidth}{
+\vskip2mm
+\large\insertframetitle}}
+
+
+\setbeamertemplate{sidebar left}{
+{\color{unibw-orange}\rule{1.2mm}{.999\paperheight}}\hspace{-.5mm}
+{\color{darkgray}\rule{.3mm}{.999\paperheight}}\hspace{-.5mm}
+{\color{lightgray}\rule{1.mm}{.999\paperheight}}
+% \hspace{1.7mm}\raisebox{1mm}{\footnotesize \Prefix-\theframenumber}
+}
+
+
+% Mathematische Definitionen von Kollegen Hertling
+\def\IN{{\mathbb N}}
+\def\In{\subseteq}
+\def\vep{{\varepsilon}}
+\def\dotminus{-^{\!\!\!\!\!\mbox{\Large.}}\,}
+\newcommand{\dt}{{\scriptscriptstyle \bullet}}
+
+\def\Def{\mathop{\rm Def}}
+\def\Bild{\mathop{\rm Bild}}
+
+\def\ma{\mathcal{A}}
+\def\mb{\mathcal{B}}
+\def\mi{\mathcal{I}}
+
+
+% \setbeamertemplate{section in toc}[sections numbered]
+% \setbeamertemplate{subsection in toc}[subsections numbered]
+% \setbeamertemplate{subsubsection in toc}[subsubsections numbered]
+
+
+\makeatletter
+  \@addtoreset{framenumber}{section}
+  \@addtoreset{framenumber}{subsection}
+  \@addtoreset{framenumber}{subsubsection}
+  \@addtoreset{equation}{section}
+  \@addtoreset{equation}{subsection}
+  \@addtoreset{equation}{subsubsection}
+  \@addtoreset{table}{section}
+  \@addtoreset{table}{subsection}
+  \@addtoreset{table}{subsubsection}
+  \@addtoreset{figure}{section}
+  \@addtoreset{figure}{subsection}
+  \@addtoreset{figure}{subsubsection}
+
+% for numbering frames according to section / subsection
+\def\Prefix{\thesection%
+	\ifnum\c@subsection>0\relax.\the\c@subsection\fi
+	\ifnum\c@subsubsection>0\relax.\the\c@subsubsection\fi
+	}
+
+\def\theequation{\Prefix-\the\c@equation}
+\def\thefigure{\Prefix-\the\c@figure}
+\def\thetable{\Prefix-\the\c@table}
+\makeatother
+
+% \newcommand{\insertsectionnumber}
+%   {
+%     \ifthenelse{\thesection>0}
+%     {\thesection}
+%     {}
+%   }
+
+% \newcommand{\insertsubsectionnumber}
+%   {
+%     \ifthenelse{\thesection>0}
+%       {\ifthenelse{\thesubsection>0}
+%         {\thesection.\thesubsection}
+%         {}
+%       }
+%     {}
+%   }
+
+% \newcommand{\insertsubsubsectionnumber}
+%   {
+%     \ifthenelse{\thesection>0}
+%       {\ifthenelse{\thesubsection>0}
+%         {\ifthenelse{\thesubsubsection>0}
+%           {\thesection.\thesubsection.\thesubsubsection}
+%           {}
+%         }
+%         {}
+%       }
+%     {}
+%   }
+
+
+%\setbeamertemplate{itemize item}[circle]

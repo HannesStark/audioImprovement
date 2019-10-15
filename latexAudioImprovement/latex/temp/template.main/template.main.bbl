@@ -1,0 +1,275 @@
+% $ biblatex auxiliary file $
+% $ biblatex bbl format version 3.1 $
+% Do not modify the above lines!
+%
+% This is an auxiliary file used by the 'biblatex' package.
+% This file may safely be deleted. It will be recreated by
+% biber as required.
+%
+\begingroup
+\makeatletter
+\@ifundefined{ver@biblatex.sty}
+  {\@latex@error
+     {Missing 'biblatex' package}
+     {The bibliography requires the 'biblatex' package.}
+      \aftergroup\endinput}
+  {}
+\endgroup
+
+
+\refsection{0}
+  \datalist[entry]{nyt/global//global/global}
+    \entry{2017-wasserstein-gan}{inproceedings}{}
+      \name{author}{3}{}{%
+        {{hash=ab4a5e058dea2d852ff02aa4e10045c3}{%
+           family={Arjovsky},
+           familyi={A\bibinitperiod},
+           given={Martin},
+           giveni={M\bibinitperiod}}}%
+        {{hash=8ef51a0906e47d2b4472c4e714ed598f}{%
+           family={Chintala},
+           familyi={C\bibinitperiod},
+           given={Soumith},
+           giveni={S\bibinitperiod}}}%
+        {{hash=ac762f2592005edf6bad58f566967c6c}{%
+           family={Bottou},
+           familyi={B\bibinitperiod},
+           given={L{é}on},
+           giveni={L\bibinitperiod}}}%
+      }
+      \name{editor}{2}{}{%
+        {{hash=4428b76e1301b2db58587fb18bb59a38}{%
+           family={Precup},
+           familyi={P\bibinitperiod},
+           given={Doina},
+           giveni={D\bibinitperiod}}}%
+        {{hash=a71fae003da84f44e31d26e868859945}{%
+           family={Teh},
+           familyi={T\bibinitperiod},
+           given={Yee\bibnamedelima Whye},
+           giveni={Y\bibinitperiod\bibinitdelim W\bibinitperiod}}}%
+      }
+      \list{location}{1}{%
+        {International Convention Centre, Sydney, Australia}%
+      }
+      \list{publisher}{1}{%
+        {PMLR}%
+      }
+      \strng{namehash}{c0253375e3f94eb82dddef2732bbe5a4}
+      \strng{fullhash}{f587dda04e83e5dc90f2168faf0f4796}
+      \strng{bibnamehash}{c0253375e3f94eb82dddef2732bbe5a4}
+      \strng{authorbibnamehash}{c0253375e3f94eb82dddef2732bbe5a4}
+      \strng{authornamehash}{c0253375e3f94eb82dddef2732bbe5a4}
+      \strng{authorfullhash}{f587dda04e83e5dc90f2168faf0f4796}
+      \strng{editorbibnamehash}{1e933ffcca9c87eac49a09ea0da5c5a6}
+      \strng{editornamehash}{1e933ffcca9c87eac49a09ea0da5c5a6}
+      \strng{editorfullhash}{ee1b5a05452f2afba9cd287be3ce0338}
+      \field{sortinit}{A}
+      \field{sortinithash}{a3dcedd53b04d1adfd5ac303ecd5e6fa}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{year}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{We introduce a new algorithm named WGAN, an alternative to traditional GAN training. In this new model, we show that we can improve the stability of learning, get rid of problems like mode collapse, and provide meaningful learning curves useful for debugging and hyperparameter searches. Furthermore, we show that the corresponding optimization problem is sound, and provide extensive theoretical work highlighting the deep connections to different distances between distributions.}
+      \field{booktitle}{Proceedings of the 34th International Conference on Machine Learning}
+      \field{month}{06--11 Aug}
+      \field{series}{Proceedings of Machine Learning Research}
+      \field{title}{{W}asserstein Generative Adversarial Networks}
+      \field{volume}{70}
+      \field{year}{2017}
+      \field{pages}{214\bibrangedash 223}
+      \range{pages}{10}
+      \verb{file}
+      \verb http://proceedings.mlr.press/v70/arjovsky17a/arjovsky17a.pdf
+      \endverb
+    \endentry
+    \entry{2017-loss-function-for-time-series}{inproceedings}{}
+      \name{author}{2}{}{%
+        {{hash=a771427291cb72a39e026a68b102335d}{%
+           family={Cuturi},
+           familyi={C\bibinitperiod},
+           given={Marco},
+           giveni={M\bibinitperiod}}}%
+        {{hash=d3b6c8582cea4e8b6576137b6a72cadc}{%
+           family={Blondel},
+           familyi={B\bibinitperiod},
+           given={Mathieu},
+           giveni={M\bibinitperiod}}}%
+      }
+      \name{editor}{2}{}{%
+        {{hash=4428b76e1301b2db58587fb18bb59a38}{%
+           family={Precup},
+           familyi={P\bibinitperiod},
+           given={Doina},
+           giveni={D\bibinitperiod}}}%
+        {{hash=a71fae003da84f44e31d26e868859945}{%
+           family={Teh},
+           familyi={T\bibinitperiod},
+           given={Yee\bibnamedelima Whye},
+           giveni={Y\bibinitperiod\bibinitdelim W\bibinitperiod}}}%
+      }
+      \list{location}{1}{%
+        {International Convention Centre, Sydney, Australia}%
+      }
+      \list{publisher}{1}{%
+        {PMLR}%
+      }
+      \strng{namehash}{23774c5784dc380f2890737ecf0741c6}
+      \strng{fullhash}{e91d5a921245a06c6d55052dd775db94}
+      \strng{bibnamehash}{23774c5784dc380f2890737ecf0741c6}
+      \strng{authorbibnamehash}{23774c5784dc380f2890737ecf0741c6}
+      \strng{authornamehash}{23774c5784dc380f2890737ecf0741c6}
+      \strng{authorfullhash}{e91d5a921245a06c6d55052dd775db94}
+      \strng{editorbibnamehash}{1e933ffcca9c87eac49a09ea0da5c5a6}
+      \strng{editornamehash}{1e933ffcca9c87eac49a09ea0da5c5a6}
+      \strng{editorfullhash}{ee1b5a05452f2afba9cd287be3ce0338}
+      \field{sortinit}{C}
+      \field{sortinithash}{4c244ceae61406cdc0cc2ce1cb1ff703}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{year}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{We propose in this paper a differentiable learning loss between time series, building upon the celebrated dynamic time warping (DTW) discrepancy. Unlike the Euclidean distance, DTW can compare time series of variable size and is robust to shifts or dilatations across the time dimension. To compute DTW, one typically solves a minimal-cost alignment problem between two time series using dynamic programming. Our work takes advantage of a smoothed formulation of DTW, called soft-DTW, that computes the soft-minimum of all alignment costs. We show in this paper that soft-DTW is a \emph{differentiable} loss function, and that both its value and gradient can be computed with quadratic time/space complexity (DTW has quadratic time but linear space complexity). We show that this regularization is particularly well suited to average and cluster time series under the DTW geometry, a task for which our proposal significantly outperforms existing baselines (Petitjean et al., 2011). Next, we propose to tune the parameters of a machine that outputs time series by minimizing its fit with ground-truth labels in a soft-DTW sense. Source code is available at https://github.com/mblondel/soft-dtw}
+      \field{booktitle}{Proceedings of the 34th International Conference on Machine Learning}
+      \field{month}{06--11 Aug}
+      \field{series}{Proceedings of Machine Learning Research}
+      \field{title}{Soft-{DTW}: a Differentiable Loss Function for Time-Series}
+      \field{volume}{70}
+      \field{year}{2017}
+      \field{pages}{894\bibrangedash 903}
+      \range{pages}{10}
+      \verb{file}
+      \verb http://proceedings.mlr.press/v70/cuturi17a/cuturi17a.pdf
+      \endverb
+    \endentry
+    \entry{2017-SEGAN}{article}{}
+      \name{author}{3}{}{%
+        {{hash=cb520ee80b8822ef8ff915a863a7db3c}{%
+           family={Pascual},
+           familyi={P\bibinitperiod},
+           given={Santiago},
+           giveni={S\bibinitperiod}}}%
+        {{hash=5bcea94a2b47186fcfd3f362ec64be5c}{%
+           family={Bonafonte},
+           familyi={B\bibinitperiod},
+           given={Antonio},
+           giveni={A\bibinitperiod}}}%
+        {{hash=3b29a19f949539473be764f79e8f07da}{%
+           family={Serr{à}},
+           familyi={S\bibinitperiod},
+           given={Joan},
+           giveni={J\bibinitperiod}}}%
+      }
+      \strng{namehash}{dbbc36751eab40c5539a28a543ef7e00}
+      \strng{fullhash}{a75afca2a65889212bbf103643320971}
+      \strng{bibnamehash}{dbbc36751eab40c5539a28a543ef7e00}
+      \strng{authorbibnamehash}{dbbc36751eab40c5539a28a543ef7e00}
+      \strng{authornamehash}{dbbc36751eab40c5539a28a543ef7e00}
+      \strng{authorfullhash}{a75afca2a65889212bbf103643320971}
+      \field{sortinit}{P}
+      \field{sortinithash}{bb5b15f2db90f7aef79bb9e83defefcb}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{year}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{eprinttype}{arXiv}
+      \field{journaltitle}{CoRR}
+      \field{title}{{SEGAN:} Speech Enhancement Generative Adversarial Network}
+      \field{volume}{abs/1703.09452}
+      \field{year}{2017}
+      \verb{eprint}
+      \verb 1703.09452
+      \endverb
+    \endentry
+    \entry{2019-deep-learning-audio-processing}{article}{}
+      \name{author}{6}{}{%
+        {{hash=6997dc9213646ad09e66910623d98b35}{%
+           family={Purwins},
+           familyi={P\bibinitperiod},
+           given={Hendrik},
+           giveni={H\bibinitperiod}}}%
+        {{hash=a9c8728e355996d027a7e56b60820a18}{%
+           family={Li},
+           familyi={L\bibinitperiod},
+           given={Bo},
+           giveni={B\bibinitperiod}}}%
+        {{hash=57782ed29cdf64f4eca2ebe4cebed0f2}{%
+           family={Virtanen},
+           familyi={V\bibinitperiod},
+           given={Tuomas},
+           giveni={T\bibinitperiod}}}%
+        {{hash=9f118d3582197497a9715d900638f1bc}{%
+           family={Schl{ü}ter},
+           familyi={S\bibinitperiod},
+           given={Jan},
+           giveni={J\bibinitperiod}}}%
+        {{hash=45a7277b34701ff3fdf18e655b1e680d}{%
+           family={Chang},
+           familyi={C\bibinitperiod},
+           given={Shuo{-}Yiin},
+           giveni={S\bibinitperiod}}}%
+        {{hash=28a3d000e5cd60656250014708db8ec1}{%
+           family={Sainath},
+           familyi={S\bibinitperiod},
+           given={Tara\bibnamedelima N.},
+           giveni={T\bibinitperiod\bibinitdelim N\bibinitperiod}}}%
+      }
+      \strng{namehash}{46ef5421c7b7a847c5cc83311d08ca49}
+      \strng{fullhash}{999279a82bc2e0077872b95ccd68807b}
+      \strng{bibnamehash}{46ef5421c7b7a847c5cc83311d08ca49}
+      \strng{authorbibnamehash}{46ef5421c7b7a847c5cc83311d08ca49}
+      \strng{authornamehash}{46ef5421c7b7a847c5cc83311d08ca49}
+      \strng{authorfullhash}{999279a82bc2e0077872b95ccd68807b}
+      \field{sortinit}{P}
+      \field{sortinithash}{bb5b15f2db90f7aef79bb9e83defefcb}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{year}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{eprinttype}{arXiv}
+      \field{journaltitle}{CoRR}
+      \field{title}{Deep Learning for Audio Signal Processing}
+      \field{volume}{abs/1905.00078}
+      \field{year}{2019}
+      \verb{eprint}
+      \verb 1905.00078
+      \endverb
+    \endentry
+    \entry{2017-speech-seperation-overview}{article}{}
+      \name{author}{2}{}{%
+        {{hash=0a1bd97b59cb3cf65dc849873adf0d25}{%
+           family={Wang},
+           familyi={W\bibinitperiod},
+           given={DeLiang},
+           giveni={D\bibinitperiod}}}%
+        {{hash=802e815ed5fcef558fc2d859ea49149b}{%
+           family={Chen},
+           familyi={C\bibinitperiod},
+           given={Jitong},
+           giveni={J\bibinitperiod}}}%
+      }
+      \strng{namehash}{29080328e715ccf831cff2d1bdbb5453}
+      \strng{fullhash}{1e68585f882e9a38535f83b489f79bc0}
+      \strng{bibnamehash}{29080328e715ccf831cff2d1bdbb5453}
+      \strng{authorbibnamehash}{29080328e715ccf831cff2d1bdbb5453}
+      \strng{authornamehash}{29080328e715ccf831cff2d1bdbb5453}
+      \strng{authorfullhash}{1e68585f882e9a38535f83b489f79bc0}
+      \field{sortinit}{W}
+      \field{sortinithash}{1af34bd8c148ffb32de1494636b49713}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{year}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{eprinttype}{arXiv}
+      \field{journaltitle}{CoRR}
+      \field{title}{Supervised Speech Separation Based on Deep Learning: An Overview}
+      \field{volume}{abs/1708.07524}
+      \field{year}{2017}
+      \verb{eprint}
+      \verb 1708.07524
+      \endverb
+    \endentry
+  \enddatalist
+\endrefsection
+\endinput
+
