@@ -1,7 +1,7 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (MiKTeX 2.9.7140 64-bit) (preloaded format=pdflatex 2019.9.28)  9 OCT 2019 16:49
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (MiKTeX 2.9.7140 64-bit) (preloaded format=pdflatex 2019.9.28)  3 NOV 2019 16:43
 entering extended mode
-**d:/projects/audioImprovement/latexAudioImprovement/template.main.tex
-(d:/projects/audioImprovement/latexAudioImprovement/template.main.tex
+**d:/projects/audioImprovement/latexAudioimprovement/template.main.tex
+(d:/projects/audioImprovement/latexAudioimprovement/template.main.tex
 LaTeX2e <2018-12-01>
 ("C:\Program Files\MiKTeX 2.9\tex/latex/base\article.cls"
 Document Class: article 2018/09/03 v1.4i Standard LaTeX document class
@@ -672,24 +672,24 @@ Package biblatex Info: Trying to load language 'english'...
 Package biblatex Info: ... file 'english.lbx' found.
  ("C:\Program Files\MiKTeX 2.9\tex/latex/biblatex/lbx\english.lbx"
 File: english.lbx 2019/08/31 v3.13a biblatex localization (PK/MW)
-) (d:\projects\audioImprovement\latexAudioImprovement\latex\temp\template.main\template.main.aux)
+) (d:\projects\audioImprovement\latexAudioimprovement\latex\temp\template.main\template.main.aux)
 \openout1 = `template.main.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 20.
-LaTeX Font Info:    ... okay on input line 20.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 20.
-LaTeX Font Info:    ... okay on input line 20.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 20.
-LaTeX Font Info:    ... okay on input line 20.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 20.
-LaTeX Font Info:    ... okay on input line 20.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 20.
-LaTeX Font Info:    ... okay on input line 20.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 20.
-LaTeX Font Info:    ... okay on input line 20.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 20.
-LaTeX Font Info:    ... okay on input line 20.
-LaTeX Font Info:    Try loading font information for T1+lmr on input line 20.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 18.
+LaTeX Font Info:    ... okay on input line 18.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 18.
+LaTeX Font Info:    ... okay on input line 18.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 18.
+LaTeX Font Info:    ... okay on input line 18.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 18.
+LaTeX Font Info:    ... okay on input line 18.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 18.
+LaTeX Font Info:    ... okay on input line 18.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 18.
+LaTeX Font Info:    ... okay on input line 18.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 18.
+LaTeX Font Info:    ... okay on input line 18.
+LaTeX Font Info:    Try loading font information for T1+lmr on input line 18.
  ("C:\Program Files\MiKTeX 2.9\tex/latex/lm\t1lmr.fd"
 File: t1lmr.fd 2009/10/30 v1.6 Font defs for Latin Modern
 ) ("C:\Program Files\MiKTeX 2.9\tex/context/base/mkii\supp-pdf.mkii"
@@ -724,9 +724,9 @@ Package: ltcaption 2018/08/26 v1.4a longtable captions (AR)
 )
 Package caption Info: End \AtBeginDocument code.
  ABD: EverySelectfont initializing macros
-LaTeX Info: Redefining \selectfont on input line 20.
+LaTeX Info: Redefining \selectfont on input line 18.
 \AtBeginShipoutBox=\box40
-Package hyperref Info: Link coloring OFF on input line 20.
+Package hyperref Info: Link coloring OFF on input line 18.
  ("C:\Program Files\MiKTeX 2.9\tex/latex/hyperref\nameref.sty"
 Package: nameref 2019/09/12 v2.45 Cross-referencing by name of section
  ("C:\Program Files\MiKTeX 2.9\tex/generic/oberdiek\gettitlestring.sty"
@@ -734,10 +734,10 @@ Package: gettitlestring 2016/05/16 v1.5 Cleanup title references (HO)
 )
 \c@section@level=\count329
 )
-LaTeX Info: Redefining \ref on input line 20.
-LaTeX Info: Redefining \pageref on input line 20.
-LaTeX Info: Redefining \nameref on input line 20.
- (d:\projects\audioImprovement\latexAudioImprovement\latex\temp\template.main\template.main.out) (d:\projects\audioImprovement\latexAudioImprovement\latex\temp\template.main\template.main.out)
+LaTeX Info: Redefining \ref on input line 18.
+LaTeX Info: Redefining \pageref on input line 18.
+LaTeX Info: Redefining \nameref on input line 18.
+ (d:\projects\audioImprovement\latexAudioimprovement\latex\temp\template.main\template.main.out) (d:\projects\audioImprovement\latexAudioimprovement\latex\temp\template.main\template.main.out)
 \@outlinefile=\write4
 \openout4 = `template.main.out'.
 
@@ -748,38 +748,38 @@ Package biblatex Info: Automatic encoding selection.
 
 Package biblatex Info: Trying to load bibliographic data...
 Package biblatex Info: ... file 'template.main.bbl' found.
- (d:\projects\audioImprovement\latexAudioImprovement\latex\temp\template.main\template.main.bbl)
-Package biblatex Info: Reference section=0 on input line 20.
-Package biblatex Info: Reference segment=0 on input line 20.
+ (d:\projects\audioImprovement\latexAudioimprovement\latex\temp\template.main\template.main.bbl)
+Package biblatex Info: Reference section=0 on input line 18.
+Package biblatex Info: Reference segment=0 on input line 18.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <12> on input line 26.
+(Font)              <12> on input line 24.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <8> on input line 26.
+(Font)              <8> on input line 24.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <6> on input line 26.
+(Font)              <6> on input line 24.
  (latex/tex/abstract.tex) [1
 
-{C:/Users/HannesStaerk/AppData/Local/MiKTeX/2.9/pdftex/config/pdftex.map}] (d:\projects\audioImprovement\latexAudioImprovement\latex\temp\template.main\template.main.toc)
+{C:/Users/HannesStaerk/AppData/Local/MiKTeX/2.9/pdftex/config/pdftex.map}] (d:\projects\audioImprovement\latexAudioimprovement\latex\temp\template.main\template.main.toc)
 \tf@toc=\write5
 \openout5 = `template.main.toc'.
 
  [2] (latex/tex/methodology.tex) [3]
-LaTeX Font Info:    Try loading font information for T1+lmtt on input line 36.
+LaTeX Font Info:    Try loading font information for T1+lmtt on input line 34.
  ("C:\Program Files\MiKTeX 2.9\tex/latex/lm\t1lmtt.fd"
 File: t1lmtt.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
 
-Package biblatex Warning: Type 'misc' not found on input line 37.
+Package biblatex Warning: Type 'misc' not found on input line 35.
 
 
-LaTeX Warning: Empty bibliography on input line 37.
+LaTeX Warning: Empty bibliography on input line 35.
 
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 39.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 37.
 [4]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 39.
- (d:\projects\audioImprovement\latexAudioImprovement\latex\temp\template.main\template.main.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 39.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 39.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 37.
+ (d:\projects\audioImprovement\latexAudioimprovement\latex\temp\template.main\template.main.aux)
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 37.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 37.
 Package rerunfilecheck Info: File `template.main.out' has not changed.
 (rerunfilecheck)             Checksum: A6D9C432116B6D830D3A7262BF35EE3A;112.
 Package logreq Info: Writing requests to 'template.main.run.xml'.
@@ -787,17 +787,19 @@ Package logreq Info: Writing requests to 'template.main.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 18544 strings out of 492895
- 323359 string characters out of 3133458
- 793503 words of memory out of 3000000
- 22168 multiletter control sequences out of 15000+200000
- 81854 words of font info for 75 fonts, out of 3000000 for 9000
+ 18553 strings out of 492895
+ 324139 string characters out of 3133458
+ 794592 words of memory out of 3000000
+ 22174 multiletter control sequences out of 15000+200000
+ 84649 words of font info for 76 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
  60i,6n,94p,1381b,1433s stack positions out of 5000i,500n,10000p,200000b,50000s
-{C:/Program Files/MiKTeX 2.9/fonts/enc/dvips/lm/lm-ec.enc}<C:/Program Files/MiKTeX 2.9/fonts/type1/public/lm/lmbx10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/lm/lmbx12.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/lm/lmbx9.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/lm/lmr10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/lm/lmr12.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/lm/lmr17.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/lm/lmr9.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/lm/lmri10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/lm/lmtt10.pfb>
-Output written on d:\projects\audioImprovement\latexAudioImprovement\latex\temp\template.main\template.main.pdf (4 pages, 221634 bytes).
+pdfTeX warning (dest): name{https://www.youtube.com/watch?v=E1fcvTzhKvY} has been referenced but does not exist, replaced by a fixed one
+
+{C:/Program Files/MiKTeX 2.9/fonts/enc/dvips/lm/lm-ec.enc}<C:/Program Files/MiKTeX 2.9/fonts/type1/public/lm/lmbx10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/lm/lmbx12.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/lm/lmbx9.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/lm/lmcsc10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/lm/lmr10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/lm/lmr12.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/lm/lmr17.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/lm/lmr9.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/lm/lmri10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/lm/lmtt10.pfb>
+Output written on d:\projects\audioImprovement\latexAudioimprovement\latex\temp\template.main\template.main.pdf (4 pages, 244209 bytes).
 PDF statistics:
- 89 PDF objects out of 1000 (max. 8388607)
- 14 named destinations out of 1000 (max. 500000)
+ 99 PDF objects out of 1000 (max. 8388607)
+ 16 named destinations out of 1000 (max. 500000)
  17 words of extra memory for PDF output out of 10000 (max. 10000000)
 

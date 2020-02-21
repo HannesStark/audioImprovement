@@ -2139,9 +2139,10 @@
   <bcf:section number="0">
     <bcf:citekey order="1">2017-speech-seperation-overview</bcf:citekey>
     <bcf:citekey order="2">2017-SEGAN</bcf:citekey>
-    <bcf:citekey order="3">2017-wasserstein-gan</bcf:citekey>
-    <bcf:citekey order="4">2017-loss-function-for-time-series</bcf:citekey>
-    <bcf:citekey order="5">2019-deep-learning-audio-processing</bcf:citekey>
+    <bcf:citekey order="3">2019-Noise-reduction-hamburg</bcf:citekey>
+    <bcf:citekey order="4">2017-wasserstein-gan</bcf:citekey>
+    <bcf:citekey order="5">2017-loss-function-for-time-series</bcf:citekey>
+    <bcf:citekey order="6">2019-deep-learning-audio-processing</bcf:citekey>
   </bcf:section>
   <!-- SORTING TEMPLATES -->
   <bcf:sortingtemplate name="nyt">

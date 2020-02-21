@@ -7,7 +7,7 @@
 // =============================================================================
   
 "latex-workshop.message.error.show": false,
-"latex-workshop.latex.autoBuild.run": "onFileChange",
+"latex-workshop.latex.autoBuild.run": "never",
 "latex-workshop.intellisense.package.enabled": true,
 
 "latex-workshop.view.pdf.viewer": "tab",

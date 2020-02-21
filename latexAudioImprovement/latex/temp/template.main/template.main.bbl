@@ -235,6 +235,42 @@
       \verb 1905.00078
       \endverb
     \endentry
+    \entry{2019-Noise-reduction-hamburg}{inproceedings}{}
+      \name{author}{2}{}{%
+        {{hash=362d34b891a8c6efa4ac9e7afd88d8d9}{%
+           family={{Rehr}},
+           familyi={R\bibinitperiod},
+           given={R.},
+           giveni={R\bibinitperiod}}}%
+        {{hash=0d4489b104d539033681c5d92b40ecec}{%
+           family={{Gerkmann}},
+           familyi={G\bibinitperiod},
+           given={T.},
+           giveni={T\bibinitperiod}}}%
+      }
+      \strng{namehash}{eb8c32259cbebc534e6ac59c071e57a3}
+      \strng{fullhash}{df2db435e9001e58d33eddc998f39a3d}
+      \strng{bibnamehash}{eb8c32259cbebc534e6ac59c071e57a3}
+      \strng{authorbibnamehash}{eb8c32259cbebc534e6ac59c071e57a3}
+      \strng{authornamehash}{eb8c32259cbebc534e6ac59c071e57a3}
+      \strng{authorfullhash}{df2db435e9001e58d33eddc998f39a3d}
+      \field{sortinit}{R}
+      \field{sortinithash}{b9c68a358aea118dfa887b6e902414a7}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{year}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{ICASSP 2019 - 2019 IEEE International Conference on Acoustics, Speech and Signal Processing (ICASSP)}
+      \field{month}{5}
+      \field{title}{An Analysis of Noise-aware Features in Combination with the Size and Diversity of Training Data for DNN-based Speech Enhancement}
+      \field{year}{2019}
+      \field{pages}{601\bibrangedash 605}
+      \range{pages}{5}
+      \verb{doi}
+      \verb 10.1109/ICASSP.2019.8682991
+      \endverb
+      \keyw{neural nets;speech enhancement;stochastic processes;noise-aware features;DNN-based speech enhancement;speech enhancement algorithms;deep neural networks;noise aware training features;signal-to-noise ratio;noise power spectral density;noisy periodogram input feature;noise PSD;SNR-NAT features;diverse training set;background noise;Speech enhancement;Noise measurement;Training;Signal to noise ratio;Acoustics;Training data;Neural networks;Deep neural networks;generalization;speech enhancement;noise reduction;input features}
+    \endentry
     \entry{2017-speech-seperation-overview}{article}{}
       \name{author}{2}{}{%
         {{hash=0a1bd97b59cb3cf65dc849873adf0d25}{%
