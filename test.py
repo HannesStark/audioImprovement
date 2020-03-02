@@ -1,34 +1,23 @@
-from pydub import AudioSegment
-from pydub.playback import play
+import torch
+
+from datasets.audio_dataset import AudioDataset
+from utils import clean_audio
 import matplotlib.pyplot as plt
-from pydub.utils import mediainfo
-import numpy as np
 
-data_path = 'F:/datasets/libri_speech'
+noisy_clips_dir = 'F:/datasets/libri_speech_subset_noisy'
+data_path_noise = 'F:/datasets/Nonspeech'
 
-info = mediainfo("F:/datasets/Nonspeech/n29.wav")
+noisy_clips_dataset = AudioDataset(noisy_clips_dir)
+noisy_clip = noisy_clips_dataset[3]
 
-song1 = AudioSegment.from_wav("F:/datasets/Nonspeech/n1.wav")
-song2 = AudioSegment.from_wav("F:/datasets/Nonspeech/n29.wav")
-song1 -= 10
+model = torch.load('saved/firstTestNet20000')
 
-new = AudioSegment.empty()
-no_crossfade1 = song1.append(new, crossfade=0)
-print(song1.duration_seconds)
-print(song2.duration_seconds)
-print(no_crossfade1.duration_seconds)
-no_crossfade1.export("asfa.wav", format="wav")
-song = song1.overlay(song2)
-song.export("testlala.wav", format="wav")
-song = song[:1000]
-print(len(np.array(song.get_array_of_samples())))
-print(len(song))
-print(song.frame_count())
-print(song.frame_rate)
-print(song.frame_count() / song2.frame_rate)
-print(song.duration_seconds)
-plt.plot(song2.get_array_of_samples())
+cleaned_output = clean_audio(noisy_clip, model, 20000, batch_size=3)
+
+plt.plot(noisy_clip.get_array_of_samples(), label='Noisy Input')
+plt.plot(cleaned_output.get_array_of_samples(), label='Cleaned Output')
+plt.legend(loc="upper right")
 plt.show()
 
-
-
+cleaned_output.export("audio/.output.wav", format="wav")
+noisy_clip.export("audio/.input.wav", format="wav")
