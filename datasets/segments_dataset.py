@@ -2,10 +2,9 @@ import os
 import pickle
 from typing import List, Dict, Any, Tuple
 
+import librosa
 import soundfile
 import numpy as np
-from pydub import AudioSegment
-from pydub.utils import mediainfo
 import warnings
 from torch.utils.data import Dataset
 
@@ -17,11 +16,12 @@ class SegmentsDataset(Dataset):
     Upon initialization a config file is created in the speech_dir with a mapping from indices to segments
     """
 
-    def __init__(self, speech_dir: str, segment_length: int, transform=None) -> None:
+    def __init__(self, speech_dir: str, segment_length: int, sample_rate=None, transform=None) -> None:
         """
         Args:
             speech_dir (string): Path to .wav, .mp3, .flac and other files of clean speech.
             segment_length (int): The length of a single noise and the corresponding clean segment.
+            sample_rate (int): SR to which the audio will be resampled. Using native SR if this is None.
             transform (callable, optional): Optional transform to be applied
                 on a sample.
         """
@@ -29,6 +29,7 @@ class SegmentsDataset(Dataset):
         self.clip_names: List[str] = os.listdir(speech_dir)
         self.speech_dir = speech_dir
         self.segment_length = segment_length
+        self.sample_rate = sample_rate
         self.transform = transform
 
         index_segment_map_path = os.path.join(speech_dir, str(self.segment_length) + "_index_segment_map.conf")
@@ -41,7 +42,7 @@ class SegmentsDataset(Dataset):
             self.index_segment_map = []
             for clip_index, clip_name in enumerate(self.clip_names):  # All clips in directory
                 file_name = os.path.join(self.speech_dir, clip_name)
-                clip_size = soundfile.info(file_name).frames  # use soundfile here because it is MUCH faster than pydub
+                clip_size = soundfile.info(file_name).frames
                 segments_per_clip = int(clip_size / self.segment_length)
                 if clip_size < self.segment_length:
                     warnings.warn(
@@ -56,18 +57,15 @@ class SegmentsDataset(Dataset):
 
         self.dataset_length = len(self.index_segment_map)
 
-    def __getitem__(self, index: int) -> Tuple[Any, Any]:
+    def __getitem__(self, index: int) -> Tuple[np.ndarray, np.ndarray]:
         segment_description = self.index_segment_map[index]
-        file_extension: str = os.path.splitext(segment_description['clip_name'])[1][1:]
-        clip = AudioSegment.from_file(format=file_extension,
-                                      file=os.path.join(self.speech_dir, segment_description['clip_name']))
-        segment_length_in_millisec = 1000 * self.segment_length / clip.frame_rate
-        segment_index_in_millisec = segment_length_in_millisec * segment_description['index']
-        clean_segment = clip[segment_index_in_millisec: segment_index_in_millisec + segment_length_in_millisec]
+        clip, sample_rate = librosa.load(path=os.path.join(self.speech_dir, segment_description['clip_name']), sr=self.sample_rate)
+        segment_index = self.segment_length * segment_description['index']
+        clean_segment = clip[segment_index: segment_index + self.segment_length]
 
         noisy_segment = clean_segment
         if self.transform:
-            noisy_segment, clean_segment = self.transform((noisy_segment, clean_segment))
+            noisy_segment, clean_segment, sample_rate = self.transform((noisy_segment, clean_segment, sample_rate))
 
         return noisy_segment, clean_segment
 

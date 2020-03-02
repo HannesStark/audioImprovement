@@ -1,8 +1,8 @@
 import os
 from typing import List, Any, Tuple
 
+import librosa
 import numpy as np
-from pydub import AudioSegment
 import warnings
 from torch.utils.data import Dataset
 
@@ -11,7 +11,7 @@ class SegmentsSampledDataset(Dataset):
     """Creates dataset of a specified size that is randomly sampled from the given speech directory.
     """
 
-    def __init__(self, speech_dir: str, segment_length: int, dataset_length: int = None,
+    def __init__(self, speech_dir: str, segment_length: int, dataset_length: int, sample_rate = None,
                  transform=None) -> None:
         """
         Args:
@@ -19,6 +19,7 @@ class SegmentsSampledDataset(Dataset):
             segment_length (int): The length of a single noise and the corresponding clean segment.
             dataset_length (int): Specifies length of the dataset that will be randomly sampled from the specified
             speech directory.
+            sample_rate (int): SR to which the audio will be resampled. Using native SR if this is None.
             transform (callable, optional): Optional transform to be applied
                 on a sample.
         """
@@ -26,29 +27,26 @@ class SegmentsSampledDataset(Dataset):
         self.clip_names: List[str] = os.listdir(speech_dir)
         self.speech_dir = speech_dir
         self.segment_length = segment_length
+        self.sample_rate = sample_rate
         self.transform = transform
         self.dataset_length = dataset_length
 
-    def __getitem__(self, index: int) -> Tuple[Any, Any]:
+    def __getitem__(self, index: int) -> Tuple[np.ndarray, np.ndarray]:
         clip = None
         while clip is None:
             clip_index = np.random.randint(0, self.dataset_length)
             clip_name = self.clip_names[clip_index]
-            file_extension: str = os.path.splitext(clip_name)[1][1:]
-            clip_candidate = AudioSegment.from_file(format=file_extension,
-                                                    file=os.path.join(self.speech_dir, clip_name))
-            if clip_candidate.frame_count() < self.segment_length:
+            clip_candidate, sample_rate = librosa.load(path=os.path.join(self.speech_dir, clip_name), sr=self.sample_rate)
+            if len(clip_candidate) < self.segment_length:
                 warnings.warn(
                     "The clip -" + clip_name + "- from the speech directory was smaller than the specified segment_length. It will be skipped.")
             else:
                 clip = clip_candidate
-        segment_index = np.random.randint(0, clip.frame_count() - self.segment_length)
-        segment_index_in_millisec = 1000 * segment_index / clip.frame_rate
-        segment_length_in_millisec = 1000 * self.segment_length / clip.frame_rate
-        clean_segment = clip[segment_index_in_millisec: segment_index_in_millisec + segment_length_in_millisec]
+        segment_index = np.random.randint(0, len(clip) - self.segment_length)
+        clean_segment = clip[segment_index: segment_index + self.segment_length]
         noisy_segment = clean_segment
         if self.transform:
-            noisy_segment, clean_segment = self.transform((noisy_segment, clean_segment))
+            noisy_segment, clean_segment = self.transform((noisy_segment, clean_segment, sample_rate))
 
         return noisy_segment, clean_segment
 

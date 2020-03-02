@@ -1,8 +1,10 @@
 from typing import Tuple
-from pydub import AudioSegment
+
+import numpy as np
+import torch
 from torch.utils.data import Dataset
 
-from datasets.data_utils import overlay_with_noise, audio_segment_to_norm_tensor
+from datasets.data_utils import overlay_with_noise
 
 
 class NoiseTransform(object):
@@ -16,19 +18,35 @@ class NoiseTransform(object):
         self.noise_dataset = noise_dataset
         self.number_of_noises = len(noise_dataset)
 
-    def __call__(self, segments):
-        noisy_segment, clean_segment = segments
-        return overlay_with_noise(noisy_segment, self.noise_dataset), clean_segment
+    def __call__(self, segments: Tuple[np.ndarray, np.ndarray, int]):
+        noisy_segment, clean_segment, sample_rate = segments
+        return overlay_with_noise(noisy_segment, sample_rate, self.noise_dataset), clean_segment, sample_rate
 
 
-class Normalize(object):
-    """Normalize AudioSegment to [-1,1] range numpy array."""
+class ToTensor(object):
+    """Add channels dimension if there is none and turn np.array into torch.Tensor."""
 
     def __init__(self):
         pass
 
-    def __call__(self, segments: Tuple[AudioSegment, AudioSegment]):
-        noisy_segment, clean_segment = segments
-        noisy_segment, _ = audio_segment_to_norm_tensor(noisy_segment)
-        clean_segment, _ = audio_segment_to_norm_tensor(clean_segment)
-        return noisy_segment, clean_segment
+    def __call__(self, segments: Tuple[np.ndarray, np.ndarray, int]):
+        noisy_segment, clean_segment, sample_rate = segments
+        if noisy_segment.ndim == 1:
+            noisy_segment = noisy_segment[np.newaxis, ...]
+        if clean_segment.ndim == 1:
+            clean_segment = clean_segment[np.newaxis, ...]
+
+        return torch.from_numpy(noisy_segment).float(), torch.from_numpy(clean_segment).float(), sample_rate
+
+
+class Normalize(object):
+    """Normalize to [-1,1]."""
+
+    def __init__(self):
+        pass
+
+    def __call__(self, segments: Tuple[np.ndarray, np.ndarray, int]):
+        noisy_segment, clean_segment, sample_rate = segments
+        noisy_segment = noisy_segment / np.amax(np.abs(noisy_segment))
+        clean_segment = clean_segment / np.amax(np.abs(clean_segment))
+        return noisy_segment, clean_segment, sample_rate
