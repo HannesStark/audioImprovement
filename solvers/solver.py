@@ -51,6 +51,7 @@ class Solver():
             model.train()
             for i, data in enumerate(train_loader):
                 inputs, labels = data
+                images, labels = inputs.to(device), labels.to(device)
                 optim.zero_grad()
                 outputs = model(inputs)
                 loss = self.loss_func(outputs, labels)
