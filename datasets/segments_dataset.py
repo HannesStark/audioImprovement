@@ -1,6 +1,6 @@
 import os
 import pickle
-from typing import List, Dict, Any, Tuple
+from typing import List, Tuple
 
 import librosa
 import soundfile
@@ -40,7 +40,7 @@ class SegmentsDataset(Dataset):
         else:
             print("Start parsing directory to create dataset index to segment mapping")
             self.index_segment_map = []
-            for clip_index, clip_name in enumerate(self.clip_names):  # All clips in directory
+            for clip_name in self.clip_names:  # All clips in directory
                 file_name = os.path.join(self.speech_dir, clip_name)
                 clip_size = soundfile.info(file_name).frames
                 segments_per_clip = int(clip_size / self.segment_length)

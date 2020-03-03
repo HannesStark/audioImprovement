@@ -1,5 +1,5 @@
 import os
-from typing import List, Any, Tuple
+from typing import List, Tuple
 
 import librosa
 import numpy as np
@@ -11,7 +11,7 @@ class SegmentsSampledDataset(Dataset):
     """Creates dataset of a specified size that is randomly sampled from the given speech directory.
     """
 
-    def __init__(self, speech_dir: str, segment_length: int, dataset_length: int, sample_rate = None,
+    def __init__(self, speech_dir: str, segment_length: int, dataset_length: int, sample_rate=None,
                  transform=None) -> None:
         """
         Args:
@@ -36,7 +36,8 @@ class SegmentsSampledDataset(Dataset):
         while clip is None:
             clip_index = np.random.randint(0, self.dataset_length)
             clip_name = self.clip_names[clip_index]
-            clip_candidate, sample_rate = librosa.load(path=os.path.join(self.speech_dir, clip_name), sr=self.sample_rate)
+            clip_candidate, sample_rate = librosa.load(path=os.path.join(self.speech_dir, clip_name),
+                                                       sr=self.sample_rate)
             if len(clip_candidate) < self.segment_length:
                 warnings.warn(
                     "The clip -" + clip_name + "- from the speech directory was smaller than the specified segment_length. It will be skipped.")

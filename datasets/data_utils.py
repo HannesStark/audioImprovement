@@ -1,5 +1,5 @@
 import os
-from typing import List, Tuple
+from typing import List
 
 import librosa
 import numpy as np
@@ -34,7 +34,7 @@ def overlay_with_noise(audio: np.ndarray, audio_sample_rate: int, noise_dataset:
         noise_index = np.random.randint(0, len(noise_dataset))
         single_noise, noise_sample_rate = noise_dataset[noise_index]
         single_noise = librosa.resample(single_noise, orig_sr=noise_sample_rate, target_sr=audio_sample_rate)
-        single_noise = single_noise / np.amax(np.abs(single_noise)) * np.random.rand()
+        single_noise = single_noise / np.amax(np.abs(single_noise)) * np.random.rand() * 0.5
         noise = np.concatenate([noise, single_noise])
     noise = noise[:len(audio)]
     noisy_audio = audio + noise
@@ -75,6 +75,38 @@ def create_noisy_clip_dir(input_dir: str, noise_dataset: Dataset, output_dir: st
                 audio, sample_rate = librosa.load(path=os.path.join(input_dir, audio_file), sr=None)
                 noisy_audio = overlay_with_noise(audio, sample_rate, noise_dataset)
                 sf.write(output_file_path, noisy_audio, sample_rate)
+
+
+def resample_directory(input_dir: str, sample_rate: int, output_dir: str = None,
+                       file_type: str = None) -> None:
+    """
+        Creates new directory and saves the resampled audios in there.
+
+    Args:
+        input_dir (str): path to directory with audio files to resample
+        sample_rate (int): Target sample rate
+        output_dir (Optional[str]): path of the output directory. If this is None a directory next to input_dir is created
+        file_type (Optional[str]): type of audio files. If None all files will be treated as audios except .conf
+    """
+    input_dir = os.path.split(input_dir + '/')[0]  # remove trailing / in case there is one
+    if output_dir is None:
+        output_dir = input_dir + '_SR' + str(sample_rate)
+    if not os.path.exists(output_dir):  # create directory if it does not already exist
+        os.mkdir(output_dir)
+    audio_files = os.listdir(input_dir)
+    audio_files_length = len(audio_files)
+    for i, audio_file in enumerate(audio_files):
+        output_file_path = os.path.join(output_dir, audio_file)
+        print('Resampling file ' + str(i + 1) + '/' + str(audio_files_length) + ' ' + output_file_path)
+        file_extension: str = os.path.splitext(audio_file)[1][1:]
+        if file_type is None:
+            if file_extension != 'conf':
+                audio, sample_rate = librosa.load(path=os.path.join(input_dir, audio_file), sr=sample_rate)
+                sf.write(output_file_path, audio, sample_rate)
+        else:
+            if file_extension == file_type:
+                audio, sample_rate = librosa.load(path=os.path.join(input_dir, audio_file), sr=sample_rate)
+                sf.write(output_file_path, audio, sample_rate)
 
 
 def audio_as_segments(audio: np.ndarray, segment_length: int) -> List[np.ndarray]:

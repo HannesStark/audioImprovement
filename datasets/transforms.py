@@ -7,7 +7,7 @@ from torch.utils.data import Dataset
 from datasets.data_utils import overlay_with_noise
 
 
-class NoiseTransform(object):
+class NoiseTransform():
     """Add noise to clean speech.
 
     Args:
@@ -23,7 +23,7 @@ class NoiseTransform(object):
         return overlay_with_noise(noisy_segment, sample_rate, self.noise_dataset), clean_segment, sample_rate
 
 
-class ToTensor(object):
+class ToTensor():
     """Add channels dimension if there is none and turn np.array into torch.Tensor."""
 
     def __init__(self):
@@ -39,7 +39,7 @@ class ToTensor(object):
         return torch.from_numpy(noisy_segment).float(), torch.from_numpy(clean_segment).float(), sample_rate
 
 
-class Normalize(object):
+class Normalize():
     """Normalize to [-1,1]."""
 
     def __init__(self):

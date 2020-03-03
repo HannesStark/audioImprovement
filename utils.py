@@ -35,8 +35,9 @@ def clean_audio(audio: np.ndarray, model, segment_length: int, batch_size: int =
     for i, batch in enumerate(batches):
         print("Processing batch " + str(i + 1) + '/' + str(len(batches)))
         output.append(model(batch))
-    output = torch.cat(output)
-    output = output.view([audio.shape[0], -1])  # put the segments back together
+    output = torch.cat(output) # put into shape (number of segments, channels, frames in segment)
+    output = output * torch.tensor(normalizing_factors)[:, None, None]  # multiply each segment with normalizing_factor
+    output = output.view([output.shape[1], -1])  # put the segments back together
     cutout_index = 2 * output.shape[1] - segment_length - len(audio)
     output = torch.cat((output[:, :-segment_length], output[:, cutout_index:]), dim=1)  # cut out the overlap
     return output.detach().numpy()
@@ -56,10 +57,10 @@ def disjoint_indices(size: int, ratio: float, random=True) -> Tuple[np.ndarray, 
         train_indices = np.random.choice(np.arange(size), int(size * ratio), replace=False)
         val_indices = np.setdiff1d(np.arange(size), train_indices, assume_unique=True)
         return train_indices, val_indices
-    else:
-        indices = np.arange(size)
-        split_index = int(size * ratio)
-        return indices[:split_index], indices[split_index:]
+
+    indices = np.arange(size)
+    split_index = int(size * ratio)
+    return indices[:split_index], indices[split_index:]
 
 
 def split_from_libri_download() -> None:

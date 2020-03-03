@@ -1,5 +1,4 @@
-import numpy as np
-from torch.utils.data import SequentialSampler, SubsetRandomSampler, Subset
+from torch.utils.data import Subset
 from torchvision import transforms
 
 import matplotlib.pyplot as plt
@@ -15,7 +14,7 @@ import torch
 from utils import disjoint_indices
 
 data_path_speech = 'F:/datasets/libri_speech_subset'
-data_path_noise = 'F:/datasets/Nonspeech'
+data_path_noise = 'F:/datasets/Nonspeech_SR16000'
 segment_length = 20000
 
 noise_dataset = AudioDataset(data_path_noise)
@@ -33,13 +32,7 @@ train_indices, val_indices = disjoint_indices(len(audios_with_train_noise), 0.8,
 train_data = Subset(audios_with_train_noise, train_indices)
 val_data = Subset(audios_with_val_noise, val_indices)
 
-print(len(audios_with_train_noise))
-print(len(audios_with_val_noise))
-print(len(train_data))
-print(len(val_data))
-
-train_loader = torch.utils.data.DataLoader(train_data, batch_size=10, shuffle=False, num_workers=0,
-                                           sampler=SubsetRandomSampler(np.arange(0, 30)))
+train_loader = torch.utils.data.DataLoader(train_data, batch_size=100, shuffle=True, num_workers=0)
 val_loader = torch.utils.data.DataLoader(val_data, batch_size=100, shuffle=False, num_workers=0)
 
 model = SuperSimple()

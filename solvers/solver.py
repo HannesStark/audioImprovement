@@ -1,9 +1,8 @@
-import numpy as np
 import torch
 import matplotlib.pyplot as plt
 
 
-class Solver(object):
+class Solver():
     default_adam_args = {"lr": 1e-4,
                          "betas": (0.9, 0.999),
                          "eps": 1e-8,
