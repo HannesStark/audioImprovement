@@ -41,6 +41,7 @@ class SegmentsDataset(Dataset):
             print("Start parsing directory to create dataset index to segment mapping")
             self.index_segment_map = []
             for clip_name in self.clip_names:  # All clips in directory
+                print(clip_name)
                 file_name = os.path.join(self.speech_dir, clip_name)
                 clip_size = soundfile.info(file_name).frames
                 segments_per_clip = int(clip_size / self.segment_length)
