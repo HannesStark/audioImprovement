@@ -7,7 +7,7 @@ from torch.utils.data import Dataset
 
 
 class AudioDataset(Dataset):
-    """Dataset of noises from a directory.
+    """Dataset of audios from a directory.
     """
 
     def __init__(self, audio_dir: str, sample_rate=None, transform=None) -> None:

@@ -4,19 +4,18 @@ import os
 import numpy as np
 import soundfile as sf
 import librosa
+import torch
+
+from datasets.from_segments_dir_dataset import FromSegmentsDirDataset
 from datasets.audio_dataset import AudioDataset
-from datasets.data_utils import create_noisy_clip_dir, resample_directory
+from datasets.data_utils import create_noisy_clip_dir, resample_directory, create_clean_noisy_pair_dirs, train_val_split
 
-input_dir = 'F:/datasets/libri_speech_subset'
-data_path_noise = 'F:/datasets/Nonspeech_SR16000'
+clean_dir = 'F:/datasets/libri_speech_subset_segments20000_clean'
+noisy_dir = 'F:/datasets/libri_speech_subset_segments20000_noisy'
 
-noise_dataset = AudioDataset(data_path_noise)
+full_data = FromSegmentsDirDataset(noisy_dir, clean_dir)
+train_data, val_data = train_val_split(full_data, 0.8)
 
-instance, sr = noise_dataset[8]
-sf.write("input.wav", instance, sr)
-instance2 = instance / np.amax(np.abs(instance))
+train_loader = torch.utils.data.DataLoader(train_data, batch_size=100, shuffle=True, num_workers=0)
+val_loader = torch.utils.data.DataLoader(val_data, batch_size=100, shuffle=False, num_workers=0)
 
-plt.plot(instance2)
-plt.plot(instance)
-plt.show()
-sf.write("output.wav", instance2, sr)
