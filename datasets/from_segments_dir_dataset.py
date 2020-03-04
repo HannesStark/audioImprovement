@@ -34,7 +34,7 @@ class FromSegmentsDirDataset(Dataset):
         if len(clean_segment) != len(noisy_segment):
             raise ValueError('Length of noisy segment has to be the same as for the clean segment: ' + audio_name)
         if self.transform:
-            noisy_segment, clean_segment = self.transform(noisy_segment, clean_segment)
+            noisy_segment, clean_segment = self.transform((noisy_segment, clean_segment))
 
         return noisy_segment, clean_segment
 
