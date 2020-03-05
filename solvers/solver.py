@@ -81,6 +81,7 @@ class Solver():
             val_loss = 0
             for i, data in enumerate(val_loader):
                 inputs, labels = data
+                inputs, labels = inputs.to(device), labels.to(device)
                 outputs = model.forward(inputs)
                 loss = self.loss_func(outputs, labels)
                 val_loss += loss.item()
