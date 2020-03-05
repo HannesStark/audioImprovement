@@ -1,10 +1,10 @@
-from typing import Tuple, Union
+from typing import Tuple, Union, List
 
 import numpy as np
 import torch
 from torch.utils.data import Dataset
 
-from datasets.data_utils import overlay_with_noise
+from utils import overlay_with_noise
 
 
 class NoiseTransform():
@@ -14,7 +14,7 @@ class NoiseTransform():
         noise_dataset str: PyTorch Dataset with noises
     """
 
-    def __init__(self, noise_dataset: Dataset):
+    def __init__(self, noise_dataset: Union[Dataset, List[Tuple[np.ndarray, int]]]):
         self.noise_dataset = noise_dataset
         self.number_of_noises = len(noise_dataset)
 

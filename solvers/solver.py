@@ -60,21 +60,22 @@ class Solver():
 
                 if self.create_plots:
                     temp = outputs
-                    plt.plot(temp[0][0].detach().numpy(), label='Prediction')
                     plt.plot(labels[0][0], label='Ground truth')
+                    plt.plot(temp[0][0].detach().numpy(), label='Prediction')
                     plt.ylim(-1.1, 1.1)
                     plt.legend(loc="upper right")
                     plt.show()
 
+                loss_item = loss.item()
                 if i % log_nth == log_nth - 1:
-                    print('[Epoch %d, Iteration %5d/%5d] TRAIN loss: %.3f' %
-                          (epoch + 1, i + 1, iter_per_epoch, loss.item()))
+                    print('[Epoch %d, Iteration %5d/%5d] TRAIN loss: %.5f' %
+                          (epoch + 1, i + 1, iter_per_epoch, loss_item))
 
-                self.train_loss_history_per_iter.append(loss)
+                self.train_loss_history_per_iter.append(loss_item)
                 if i + 1 == iter_per_epoch:
-                    self.train_loss_history.append(loss)
-                    print('[Epoch %d] Train loss at end of Epoch: %.3f' %
-                          (epoch + 1, loss))
+                    self.train_loss_history.append(loss_item)
+                    print('[Epoch %d] Train loss at end of Epoch: %.5f' %
+                          (epoch + 1, loss_item))
 
             model.eval()
             val_loss = 0
@@ -86,6 +87,6 @@ class Solver():
                 if i + 1 == len(val_loader):
                     val_loss /= i
                     self.val_loss_history.append(val_loss)
-                    print('[Epoch %d] VAL loss: %.3f' %
+                    print('[Epoch %d] VAL loss: %.5f' %
                           (epoch + 1, val_loss))
         print('FINISH.')

@@ -1,4 +1,5 @@
 import os
+import warnings
 from typing import List, Tuple
 
 import librosa
@@ -30,9 +31,9 @@ class FromSegmentsDirDataset(Dataset):
         clean_segment, sample_rate_clean = librosa.load(path=os.path.join(self.clean_segments_dir, audio_name), sr=None)
         noisy_segment, sample_rate_noisy = librosa.load(path=os.path.join(self.noisy_segments_dir, audio_name), sr=None)
         if sample_rate_clean != sample_rate_noisy:
-            raise ValueError('Sample rates of noisy segment has to be the same as for the clean segment: ' + audio_name)
+            warnings.warn('Sample rates of noisy segment has to be the same as for the clean segment: ' + audio_name)
         if len(clean_segment) != len(noisy_segment):
-            raise ValueError('Length of noisy segment has to be the same as for the clean segment: ' + audio_name)
+            warnings.warn('Length of noisy segment has to be the same as for the clean segment: ' + audio_name)
         if self.transform:
             noisy_segment, clean_segment = self.transform((noisy_segment, clean_segment))
 
