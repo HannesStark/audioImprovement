@@ -1,3 +1,5 @@
+import h5py
+import soundfile
 import soundfile as sf
 import os
 import warnings
@@ -56,9 +58,8 @@ def overlay_with_noise(audio: np.ndarray, audio_sample_rate: int,
     return noisy_audio * 0.5  # we can just divide by two here since both sounds are normalized to [-1,1]
 
 
-def create_clean_noisy_pair_dirs(input_dir: str, noise_dataset: Dataset, segment_length: int,
-                                 noisy_segments_dir: str = None, clean_segments_dir: str = None,
-                                 file_type: str = None) -> None:
+def create_hdf5(input_dir: str, noise_dataset: Dataset, segment_length: int, file_name: str = None,
+                file_type: str = None) -> None:
     """
         Splits audios from input dir into segments, NORMALIZES THEM and saves them to two directories where one contains
         clean segments and the other directory contains segments with the same name with added noise
@@ -71,34 +72,35 @@ def create_clean_noisy_pair_dirs(input_dir: str, noise_dataset: Dataset, segment
         file_type (Optional[str]): type of audio files. If None all files will be treated as audios except .conf
     """
     input_dir = os.path.split(input_dir + '/')[0]  # remove trailing / in case there is one
-    if noisy_segments_dir is None:
-        noisy_segments_dir = input_dir + '_segments' + str(segment_length) + '_noisy'
-    if clean_segments_dir is None:
-        clean_segments_dir = input_dir + '_segments' + str(segment_length) + '_clean'
-    if not os.path.exists(noisy_segments_dir):  # create directory if it does not already exist
-        os.mkdir(noisy_segments_dir)
-    if not os.path.exists(clean_segments_dir):  # create directory if it does not already exist
-        os.mkdir(clean_segments_dir)
+    if file_name is None:
+        file_name = input_dir + '.hdf5'
     audio_files = os.listdir(input_dir)
+    dataset_size = 0
+    print("Getting dataset size ...")
+    for audio_file in audio_files:  # All clips in directory
+        clip_size = soundfile.info(os.path.join(input_dir, audio_file)).frames
+        dataset_size += int(clip_size / segment_length)
+    print("Dataset size " + str(dataset_size))
+    print(dataset_size)
+    hdf5_file = h5py.File(os.path.join(input_dir, file_name), 'w')
+    hdf5_data = hdf5_file.create_dataset("data", shape=(dataset_size, 2, segment_length))
+    counter = 0
     for i, audio_file in enumerate(audio_files):
         print('Processing file ' + str(i + 1) + '/' + str(len(audio_files)))
         file_extension: str = os.path.splitext(audio_file)[1]
-        audio_name: str = os.path.splitext(audio_file)[0]
         if file_type is None and file_extension != '.conf' or file_type is not None and file_extension == file_type:
             audio, sample_rate = librosa.load(path=os.path.join(input_dir, audio_file), sr=None)
             try:
                 segments = audio_as_segments(audio, segment_length=segment_length)
             except ValueError:
                 warnings.warn(
-                    "The clip -" + audio_file + "- from the speech directory was smaller than the specified segment_length. It will be skipped.")
+                    "The clip " + audio_file + " from the speech directory was smaller than the specified segment_length. It will be skipped.")
                 break
             for j, clean_segment in enumerate(segments[:-1]):
                 clean_segment = clean_segment / np.amax(np.abs(clean_segment))
                 noisy_segment = overlay_with_noise(clean_segment, sample_rate, noise_dataset)
-                sf.write(os.path.join(noisy_segments_dir, audio_name + '_' + str(j) + file_extension), noisy_segment,
-                         sample_rate)
-                sf.write(os.path.join(clean_segments_dir, audio_name + '_' + str(j) + file_extension), clean_segment,
-                         sample_rate)
+                hdf5_data[counter] = [(noisy_segment, clean_segment)]
+                counter += 1
 
 
 def create_noisy_clip_dir(input_dir: str, noise_dataset: Dataset, output_dir: str = None,
@@ -179,6 +181,7 @@ def audio_as_segments(audio: np.ndarray, segment_length: int) -> List[np.ndarray
     segments.append(audio[audio_size - segment_length:])
     return segments
 
+
 def clean_audio(audio: np.ndarray, model, segment_length: int, batch_size: int = 1) -> np.ndarray:
     """
         Splits an audio into segments and feeds the segments batch wise to the given model and stitches its outputs
@@ -206,7 +209,7 @@ def clean_audio(audio: np.ndarray, model, segment_length: int, batch_size: int =
     for i, batch in enumerate(batches):
         print("Processing batch " + str(i + 1) + '/' + str(len(batches)))
         output.append(model(batch))
-    output = torch.cat(output) # put into shape (number of segments, channels, frames in segment)
+    output = torch.cat(output)  # put into shape (number of segments, channels, frames in segment)
     output = output * torch.tensor(normalizing_factors)[:, None, None]  # multiply each segment with normalizing_factor
     output = output.view([output.shape[1], -1])  # put the segments back together
     cutout_index = 2 * output.shape[1] - segment_length - len(audio)

@@ -1,22 +1,21 @@
-import matplotlib.pyplot as plt
-import os
-
-import numpy as np
-import soundfile as sf
 import librosa
-import torch
-from torchsummary import summary
+import numpy as np
 
-from datasets.from_segments_dir_dataset import FromSegmentsDirDataset
+import h5py
+
 from datasets.audio_dataset import AudioDataset
-from models.u_net import UNet
-from utils import create_noisy_clip_dir, resample_directory, create_clean_noisy_pair_dirs, train_val_split
-from datasets.transforms import ToTensor
-from models.super_simple import SuperSimple
-from solvers.solver import Solver
+from datasets.hdf5_dataset import HDF5Dataset
+from utils import create_hdf5
+import soundfile as sf
 
+#noise_dataset = AudioDataset('F:/datasets/Nonspeech_SR16000')
+#create_hdf5('F:\datasets\libri_speech', noise_dataset, 20000)
 
+#f = h5py.File('F:\datasets/libri_speech_subset.hdf5', 'r')
+#sf.write("noisy.wav", f['data'][1][0], samplerate=16000)
+#sf.write("clean.wav", f['data'][1][1], samplerate=16000)
+#print(f['data'][1])
 
-model = UNet()
+dataset = HDF5Dataset('F:\datasets/libri_speech_subset.hdf5')
 
-summary(model, (1,20000))
+print(dataset[1])
