@@ -41,15 +41,17 @@ class SegmentsDataset(Dataset):
             print("Start parsing directory to create dataset index to segment mapping")
             self.index_segment_map = []
             for clip_name in self.clip_names:  # All clips in directory
-                file_name = os.path.join(self.speech_dir, clip_name)
-                clip_size = soundfile.info(file_name).frames
-                segments_per_clip = int(clip_size / self.segment_length)
-                if clip_size < self.segment_length:
-                    warnings.warn(
-                        "The clip -" + clip_name + "- from the speech directory was smaller than the specified segment_length. It will be skipped.")
-                # All segments in clip. Notice that there will be no loop if segments_per_clip is 0.
-                for segment_of_clip in range(segments_per_clip):
-                    self.index_segment_map.append({'clip_name': clip_name, 'index': segment_of_clip})
+                file_extension: str = os.path.splitext(clip_name)[1]
+                if file_extension != '.conf':
+                    file_name = os.path.join(self.speech_dir, clip_name)
+                    clip_size = soundfile.info(file_name).frames
+                    segments_per_clip = int(clip_size / self.segment_length)
+                    if clip_size < self.segment_length:
+                        warnings.warn(
+                            "The clip -" + clip_name + "- from the speech directory was smaller than the specified segment_length. It will be skipped.")
+                    # All segments in clip. Notice that there will be no loop if segments_per_clip is 0.
+                    for segment_of_clip in range(segments_per_clip):
+                        self.index_segment_map.append({'clip_name': clip_name, 'index': segment_of_clip})
             with open(index_segment_map_path, "wb") as fp:  # save index map as file
                 pickle.dump(self.index_segment_map, fp)
             print("Finish parsing directory. Dataset length is: " + str(

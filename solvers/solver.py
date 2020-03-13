@@ -6,7 +6,7 @@ class Solver():
     default_adam_args = {"lr": 1e-4,
                          "betas": (0.9, 0.999),
                          "eps": 1e-8,
-                         "weight_decay": 0.0}
+                         "weight_decay": 0}
 
     def __init__(self, optim=torch.optim.Adam, optim_args={},
                  loss_func=torch.nn.CrossEntropyLoss(), create_plots=False):
@@ -68,16 +68,17 @@ class Solver():
 
                 loss_item = loss.item()
                 if i % log_nth == log_nth - 1:
-                    print("loss between labels and inputs: " + str(self.loss_func(inputs, labels).item()))
-                    print('[Epoch %d, Iteration %5d/%5d] TRAIN loss: %.5f' %
+                    print("difference between inputs and predictions: "+ str(self.loss_func(inputs, outputs).item()))
+                    print("difference between inputs and labels: " + str(self.loss_func(inputs, labels).item()))
+                    print('[Epoch %d, Iteration %5d/%5d] TRAIN loss: %.7f' %
                           (epoch + 1, i + 1, iter_per_epoch, loss_item))
 
                 epoch_loss += loss_item
                 self.train_loss_history_per_iter.append(loss_item)
                 if i + 1 == iter_per_epoch:
                     self.train_loss_history.append(epoch_loss/iter_per_epoch)
-                    print('[Epoch %d] Average loss of Epoch: %.5f' %
-                          (epoch + 1, epoch_loss))
+                    print('[Epoch %d] Average loss of Epoch: %.7f' %
+                          (epoch + 1, epoch_loss/iter_per_epoch))
 
             model.eval()
             val_loss = 0
@@ -90,6 +91,6 @@ class Solver():
                 if i + 1 == len(val_loader):
                     val_loss /= i
                     self.val_loss_history.append(val_loss)
-                    print('[Epoch %d] VAL loss: %.5f' %
+                    print('[Epoch %d] VAL loss: %.7f' %
                           (epoch + 1, val_loss))
         print('FINISH.')

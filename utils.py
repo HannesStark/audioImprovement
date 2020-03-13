@@ -78,8 +78,10 @@ def create_hdf5(input_dir: str, noise_dataset: Dataset, segment_length: int, fil
     dataset_size = 0
     print("Getting dataset size ...")
     for audio_file in audio_files:  # All clips in directory
-        clip_size = soundfile.info(os.path.join(input_dir, audio_file)).frames
-        dataset_size += int(clip_size / segment_length)
+        file_extension: str = os.path.splitext(audio_file)[1]
+        if file_type is None and file_extension != '.conf' or file_type is not None and file_extension == file_type:
+            clip_size = soundfile.info(os.path.join(input_dir, audio_file)).frames
+            dataset_size += int(clip_size / segment_length)
     print("Dataset size " + str(dataset_size))
     print(dataset_size)
     hdf5_file = h5py.File(os.path.join(input_dir, file_name), 'w')
