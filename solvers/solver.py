@@ -47,7 +47,7 @@ class Solver():
         print('START TRAIN.')
 
         for epoch in range(num_epochs):  # loop over the dataset multiple times
-
+            epoch_loss = 0
             model.train()
             for i, data in enumerate(train_loader):
                 inputs, labels = data
@@ -68,14 +68,16 @@ class Solver():
 
                 loss_item = loss.item()
                 if i % log_nth == log_nth - 1:
+                    print("loss between labels and inputs: " + str(self.loss_func(inputs, labels).item()))
                     print('[Epoch %d, Iteration %5d/%5d] TRAIN loss: %.5f' %
                           (epoch + 1, i + 1, iter_per_epoch, loss_item))
 
+                epoch_loss += loss_item
                 self.train_loss_history_per_iter.append(loss_item)
                 if i + 1 == iter_per_epoch:
-                    self.train_loss_history.append(loss_item)
-                    print('[Epoch %d] Train loss at end of Epoch: %.5f' %
-                          (epoch + 1, loss_item))
+                    self.train_loss_history.append(epoch_loss/iter_per_epoch)
+                    print('[Epoch %d] Average loss of Epoch: %.5f' %
+                          (epoch + 1, epoch_loss))
 
             model.eval()
             val_loss = 0

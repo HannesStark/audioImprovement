@@ -11,9 +11,9 @@ data_path_noise = 'F:/datasets/Nonspeech'
 noisy_clips_dataset = AudioDataset(noisy_clips_dir)
 noisy_clip, sample_rate = noisy_clips_dataset[3]
 
-model_name = "UNet"
-segment_length = 20000
-model = torch.load('saved/' + model_name + str(segment_length) + '.model')
+model_name = "UNetColab"
+segment_length = 512
+model = torch.load('saved/' + model_name + str(segment_length) + '.model', map_location=torch.device('cpu'))
 
 cleaned_output = clean_audio(noisy_clip, model, segment_length, batch_size=3)
 

@@ -55,7 +55,7 @@ def overlay_with_noise(audio: np.ndarray, audio_sample_rate: int,
         noise = np.concatenate([noise, single_noise])
     noise = noise[:len(audio)]
     noisy_audio = audio + noise
-    return noisy_audio  # we can just divide by two here since both sounds are normalized to [-1,1]
+    return noisy_audio
 
 
 def create_hdf5(input_dir: str, noise_dataset: Dataset, segment_length: int, file_name: str = None,
