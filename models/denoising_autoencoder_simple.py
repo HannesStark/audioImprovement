@@ -33,44 +33,42 @@ class DenoisingAutoencoderSimple(nn.Module):
 
     def forward(self, x):
         x = F.selu(self.enc1(x))
-        x = self.enc2(x)
+        x = F.selu(self.enc2(x))
         res2 = x
-        F.selu(x)
         x = F.selu(self.enc3(x))
-        x = self.enc4(x)
+        x = F.selu(self.enc4(x))
         res4 = x
-        F.selu(x)
         x = F.selu(self.enc5(x))
-        x = self.enc6(x)
+        x = F.selu(self.enc6(x))
         res6 = x
-        F.selu(x)
         x = F.selu(self.enc7(x))
-        x = self.enc8(x)
+        x = F.selu(self.enc8(x))
         res8 = x
-        F.selu(x)
         x = F.selu(self.enc9(x))
-        x = self.enc10(x)
+        x = F.selu(self.enc10(x))
         res10 = x
-        F.selu(x)
-
 
         x = F.selu(self.middle1(x))
-        x = F.selu(self.middle2(x))
-
-
+        x = self.middle2(x)
         x += res10
+        x = F.selu(x)
+
         x = F.selu(self.dec10(x))
-        x = F.selu(self.dec9(x))
+        x = self.dec9(x)
         x += res8
+        x = F.selu(x)
         x = F.selu(self.dec8(x))
-        x = F.selu(self.dec7(x))
+        x = self.dec7(x)
         x += res6
+        x = F.selu(x)
         x = F.selu(self.dec6(x))
-        x = F.selu(self.dec5(x))
+        x = self.dec5(x)
         x += res4
+        x = F.selu(x)
         x = F.selu(self.dec4(x))
-        x = F.selu(self.dec3(x))
+        x = self.dec3(x)
         x += res2
+        x = F.selu(x)
         x = F.selu(self.dec2(x))
         x = self.dec1(x)
         return torch.tanh(x)
