@@ -68,17 +68,17 @@ class Solver():
 
                 loss_item = loss.item()
                 if i % log_nth == log_nth - 1:
-                    print("difference between inputs and predictions: "+ str(self.loss_func(inputs, outputs).item()))
-                    print("difference between inputs and labels: " + str(self.loss_func(inputs, labels).item()))
+                    print("difference between inputs and predictions: " + str(self.loss_func(inputs, outputs).item()))
+                    print("difference between inputs and labels:      " + str(self.loss_func(inputs, labels).item()))
                     print('[Epoch %d, Iteration %5d/%5d] TRAIN loss: %.7f' %
                           (epoch + 1, i + 1, iter_per_epoch, loss_item))
 
                 epoch_loss += loss_item
                 self.train_loss_history_per_iter.append(loss_item)
                 if i + 1 == iter_per_epoch:
-                    self.train_loss_history.append(epoch_loss/iter_per_epoch)
+                    self.train_loss_history.append(epoch_loss / iter_per_epoch)
                     print('[Epoch %d] Average loss of Epoch: %.7f' %
-                          (epoch + 1, epoch_loss/iter_per_epoch))
+                          (epoch + 1, epoch_loss / iter_per_epoch))
 
             model.eval()
             val_loss = 0
