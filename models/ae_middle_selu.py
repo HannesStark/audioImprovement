@@ -53,7 +53,7 @@ class AEMiddleSelu(nn.Module):
         x = F.selu(self.middle3(x))
         x = F.selu(self.middle4(x))
 
-        x = F.selu(self.enc10(x))
+        x = F.selu(self.dec10(x))
         x = F.selu(self.dec9(x))
         x = F.selu(self.dec8(x))
         x = F.selu(self.dec7(x))

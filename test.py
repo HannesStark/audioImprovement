@@ -11,7 +11,7 @@ data_path_noise = 'F:/datasets/Nonspeech'
 noisy_clips_dataset = AudioDataset(noisy_clips_dir)
 noisy_clip, sample_rate = noisy_clips_dataset[7]
 
-model_name = "UNetUndercompleteLowerLR"
+model_name = "AESimple"
 segment_length = 16384
 model = torch.load('saved/' + model_name + str(segment_length) + '.model', map_location=torch.device('cpu'))
 
@@ -22,5 +22,5 @@ plt.plot(cleaned_output[0], label='Cleaned Output')
 plt.legend(loc="upper right")
 plt.show()
 
-sf.write("audio/.output.wav",cleaned_output[0], sample_rate)
-sf.write("audio/.input.wav", noisy_clip, sample_rate)
+sf.write("audio/" + model_name + "_out.wav",cleaned_output[0], sample_rate)
+sf.write("audio/" + model_name + "_in.wav", noisy_clip, sample_rate)

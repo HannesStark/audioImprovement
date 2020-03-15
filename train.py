@@ -4,8 +4,10 @@ from torchvision import transforms
 
 import matplotlib.pyplot as plt
 
+from models.ae_middle_selu import AEMiddleSelu
 from models.ae_middle_relu import AEMiddleRelu
 from models.ae_simple import AESimple
+from models.ae_simple_middle import AESimpleMiddle
 from models.u_net import UNet
 from models.undercomplete_simple import UndercompleteSimple
 from models.undercomplete_super_simple import UndercompleteSuperSimple
@@ -45,7 +47,7 @@ val_data = Subset(audios_with_val_noise, val_indices)
 train_loader = torch.utils.data.DataLoader(train_data, batch_size=5, shuffle=True, num_workers=0)
 val_loader = torch.utils.data.DataLoader(val_data, batch_size=5, shuffle=False, num_workers=0)
 
-model = AEMiddleRelu()
+model = AEMiddleSelu()
 
 solver = Solver(optim_args={"lr": 1e-3, "weight_decay": 0}, loss_func=torch.nn.MSELoss(), create_plots=True)
 solver.train(model, train_loader, val_loader, log_nth=1, num_epochs=10)
