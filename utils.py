@@ -51,14 +51,15 @@ def overlay_with_noise(audio: np.ndarray, audio_sample_rate: int,
         single_noise, noise_sample_rate = noise_dataset[noise_index]
         if audio_sample_rate != noise_sample_rate:
             single_noise = librosa.resample(single_noise, orig_sr=noise_sample_rate, target_sr=audio_sample_rate)
-        single_noise = single_noise / np.amax(np.abs(single_noise)) * np.random.rand() * 0.5
+        single_noise = single_noise / np.amax(np.abs(single_noise)) * np.random.rand() * 0.125
         noise = np.concatenate([noise, single_noise])
     noise = noise[:len(audio)]
     noisy_audio = audio + noise
     return noisy_audio
 
 
-def create_hdf5(input_dir: str, noise_dataset: Dataset, segment_length: int, file_name: str = None,
+def create_hdf5(input_dir: str, noise_dataset: Union[Dataset, List[Tuple[np.ndarray, int]]], segment_length: int,
+                file_name: str = None,
                 file_type: str = None) -> None:
     """
         Splits audios from input dir into segments, NORMALIZES THEM and saves them to two directories where one contains
@@ -105,7 +106,8 @@ def create_hdf5(input_dir: str, noise_dataset: Dataset, segment_length: int, fil
                 counter += 1
 
 
-def create_noisy_clip_dir(input_dir: str, noise_dataset: Dataset, output_dir: str = None,
+def create_noisy_clip_dir(input_dir: str, noise_dataset: Union[Dataset, List[Tuple[np.ndarray, int]]],
+                          output_dir: str = None,
                           file_type: str = None) -> None:
     """
         Creates new directory and saves audios from input_dir overlayed with noises into the new directory.
@@ -127,9 +129,9 @@ def create_noisy_clip_dir(input_dir: str, noise_dataset: Dataset, output_dir: st
     audio_files_length = len(audio_files)
     for i, audio_file in enumerate(audio_files):
         output_file_path = os.path.join(output_dir, audio_file)
-        print('Writing file ' + str(i + 1) + '/' + str(audio_files_length) + ' ' + output_file_path)
         file_extension: str = os.path.splitext(audio_file)[1]
         if file_type is None and file_extension != '.conf' or file_type is not None and file_extension == file_type:
+            print('Writing file ' + str(i + 1) + '/' + str(audio_files_length) + ' ' + output_file_path)
             audio, sample_rate = librosa.load(path=os.path.join(input_dir, audio_file), sr=None)
             noisy_audio = overlay_with_noise(audio, sample_rate, noise_dataset)
             sf.write(output_file_path, noisy_audio, sample_rate)
