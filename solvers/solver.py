@@ -1,5 +1,7 @@
 import torch
 import matplotlib.pyplot as plt
+import torchvision
+from torch.utils.tensorboard import SummaryWriter
 
 
 class Solver():
@@ -16,7 +18,7 @@ class Solver():
         self.optim = optim
         self.loss_func = loss_func
         self.create_plots = create_plots
-
+        self.writer = SummaryWriter()
         self._reset_histories()
 
     def _reset_histories(self):
@@ -47,8 +49,8 @@ class Solver():
         print('START TRAIN.')
 
         for epoch in range(num_epochs):  # loop over the dataset multiple times
-            epoch_loss = 0
             model.train()
+            train_loss = 0
             for i, data in enumerate(train_loader):
                 inputs, labels = data
                 inputs, labels = inputs.to(device), labels.to(device)
@@ -73,13 +75,11 @@ class Solver():
                     print('[Epoch %d, Iteration %5d/%5d] TRAIN loss: %.7f' %
                           (epoch + 1, i + 1, iter_per_epoch, loss_item))
 
-                epoch_loss += loss_item
+                train_loss += loss_item
                 self.train_loss_history_per_iter.append(loss_item)
-                if i + 1 == iter_per_epoch:
-                    self.train_loss_history.append(epoch_loss / iter_per_epoch)
-                    print('[Epoch %d] Average loss of Epoch: %.7f' %
-                          (epoch + 1, epoch_loss / iter_per_epoch))
-
+            self.train_loss_history.append(train_loss / iter_per_epoch)
+            print('[Epoch %d] Average loss of Epoch: %.7f' %
+                  (epoch + 1, train_loss / iter_per_epoch))
             model.eval()
             val_loss = 0
             for i, data in enumerate(val_loader):
@@ -89,8 +89,11 @@ class Solver():
                 loss = self.loss_func(outputs, labels)
                 val_loss += loss.item()
                 if i + 1 == len(val_loader):
-                    val_loss /= i
-                    self.val_loss_history.append(val_loss)
-                    print('[Epoch %d] VAL loss: %.7f' %
-                          (epoch + 1, val_loss))
-        print('FINISH.')
+                    self.writer.add_audio('ground truth', labels[0], epoch, sample_rate=1600)
+                    self.writer.add_audio('outputs', outputs[0], epoch, sample_rate=1600)
+
+            print('[Epoch %d] VAL loss: %.7f' % (epoch + 1, val_loss))
+            self.val_loss_history.append(val_loss)
+            self.writer.add_scalars('run_14h', {'train loss': train_loss / iter_per_epoch,
+                                                'val_loss': val_loss / iter_per_epoch}, epoch)
+            print('FINISH.')

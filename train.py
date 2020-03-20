@@ -8,6 +8,7 @@ from models.ae_middle_selu import AEMiddleSelu
 from models.ae_middle_relu import AEMiddleRelu
 from models.ae_simple import AESimple
 from models.ae_simple_middle import AESimpleMiddle
+from models.ae_standard import AEStandard
 from models.ae_super_simple import AESuperSimple
 from models.ae_super_simple_residual_middle import AESuperSimpleResidualMiddle
 from models.ae_super_simple_smaller import AESuperSimpleSmaller
@@ -40,23 +41,23 @@ audios_with_val_noise = SegmentsDataset(speech_dir=data_path_speech, segment_len
                                         transform=transforms.Compose(
                                             [Normalize(), NoiseTransform(val_noise), ToTensor()]))
 
-audios_with_train_noise = Subset(audios_with_train_noise, np.arange(0,2000))
-audios_with_val_noise = Subset(audios_with_val_noise, np.arange(0,2000))
+audios_with_train_noise = Subset(audios_with_train_noise, np.arange(0,300))
+audios_with_val_noise = Subset(audios_with_val_noise, np.arange(0,300))
 
 train_indices, val_indices = disjoint_indices(len(audios_with_train_noise), 0.8, random=True)
 
 train_data = Subset(audios_with_train_noise, train_indices)
 val_data = Subset(audios_with_val_noise, val_indices)
 
-train_loader = torch.utils.data.DataLoader(train_data, batch_size=5, shuffle=True, num_workers=0)
-val_loader = torch.utils.data.DataLoader(val_data, batch_size=5, shuffle=False, num_workers=0)
+train_loader = torch.utils.data.DataLoader(train_data, batch_size=30, shuffle=True, num_workers=0)
+val_loader = torch.utils.data.DataLoader(val_data, batch_size=30, shuffle=False, num_workers=0)
 
-model = UNetUndercomplete()
+model = AEStandard()
 
 solver = Solver(optim_args={"lr": 1e-3, "weight_decay": 0}, loss_func=torch.nn.L1Loss(), create_plots=True)
 solver.train(model, train_loader, val_loader, log_nth=1, num_epochs=10)
 
-model_name = "UNetUndercompleteLocal"
+model_name = model.__class__.__name__ + ''
 model.save('saved/' + model_name + str(segment_length) + '.model')
 
 plt.plot(solver.train_loss_history, label='Train loss')
