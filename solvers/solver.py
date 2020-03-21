@@ -96,4 +96,4 @@ class Solver():
             self.val_loss_history.append(val_loss)
             self.writer.add_scalars('run_14h', {'train loss': train_loss / iter_per_epoch,
                                                 'val_loss': val_loss / iter_per_epoch}, epoch)
-            print('FINISH.')
+        print('FINISH.')
