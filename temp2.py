@@ -26,6 +26,6 @@ testlist = [1, 2, 8 ,3, 4, 5,6]
 print(testlist[len(testlist)-2::-1])
 
 
-model = WaveAE()
+model = WaveAE ()
 print(model)
 summary(model,(1,16384))

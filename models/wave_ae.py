@@ -16,6 +16,7 @@ class DownSamplingLayer(nn.Module):
     def forward(self, ipt):
         return self.main(ipt)
 
+
 class UpSamplingLayer(nn.Module):
     def __init__(self, channel_in, channel_out, kernel_size=5, stride=1, padding=2):
         super(UpSamplingLayer, self).__init__()
@@ -28,6 +29,7 @@ class UpSamplingLayer(nn.Module):
 
     def forward(self, ipt):
         return self.main(ipt)
+
 
 class WaveAE(nn.Module):
     def __init__(self, n_layers=12, channels_interval=24):
@@ -56,11 +58,10 @@ class WaveAE(nn.Module):
             nn.LeakyReLU(negative_slope=0.1, inplace=True)
         )
 
-
-        decoder_in_channels_list = encoder_out_channels_list[:0:-1]
-        decoder_out_channels_list = encoder_out_channels_list[self.n_layers-2::-1]
+        decoder_in_channels_list = [self.n_layers * self.channels_interval] + encoder_out_channels_list[:0:-1]
+        decoder_out_channels_list = encoder_out_channels_list[::-1]
         self.decoder = nn.ModuleList()
-        for i in range(self.n_layers - 1):
+        for i in range(self.n_layers):
             self.decoder.append(
                 UpSamplingLayer(
                     channel_in=decoder_in_channels_list[i],
@@ -87,7 +88,7 @@ class WaveAE(nn.Module):
         o = self.middle(o)
 
         # Down Sampling
-        for i in range(self.n_layers - 1):
+        for i in range(self.n_layers):
             # [batch_size, T * 2, channels]
             o = F.interpolate(o, scale_factor=2, mode="linear", align_corners=True)
 

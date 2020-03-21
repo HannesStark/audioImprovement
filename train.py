@@ -16,6 +16,7 @@ from models.u_net import UNet
 from models.undercomplete_simple import UndercompleteSimple
 from models.undercomplete_super_simple import UndercompleteSuperSimple
 from models.unet_undercomplete import UNetUndercomplete
+from models.wave_ae import WaveAE
 from utils import train_val_split, get_audio_list
 from datasets.audio_dataset import AudioDataset
 from datasets.segments_dataset import SegmentsDataset
@@ -52,7 +53,7 @@ val_data = Subset(audios_with_val_noise, val_indices)
 train_loader = torch.utils.data.DataLoader(train_data, batch_size=30, shuffle=True, num_workers=0)
 val_loader = torch.utils.data.DataLoader(val_data, batch_size=30, shuffle=False, num_workers=0)
 
-model = AEStandard()
+model = WaveAE()
 
 solver = Solver(optim_args={"lr": 1e-3, "weight_decay": 0}, loss_func=torch.nn.L1Loss(), create_plots=True)
 solver.train(model, train_loader, val_loader, log_nth=1, num_epochs=10)

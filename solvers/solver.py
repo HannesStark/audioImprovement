@@ -1,3 +1,5 @@
+import librosa
+import numpy as np
 import torch
 import matplotlib.pyplot as plt
 import torchvision
@@ -88,12 +90,11 @@ class Solver():
                 outputs = model.forward(inputs)
                 loss = self.loss_func(outputs, labels)
                 val_loss += loss.item()
-                if i + 1 == len(val_loader):
-                    self.writer.add_audio('ground truth', labels[0], epoch, sample_rate=1600)
-                    self.writer.add_audio('outputs', outputs[0], epoch, sample_rate=1600)
+                if i + 1 == len(val_loader) and self.create_plots:
+                    pass
 
             print('[Epoch %d] VAL loss: %.7f' % (epoch + 1, val_loss))
             self.val_loss_history.append(val_loss)
-            self.writer.add_scalars('run_14h', {'train loss': train_loss / iter_per_epoch,
-                                                'val_loss': val_loss / iter_per_epoch}, epoch)
+            self.writer.add_scalars('Loss Curve', {'train loss': train_loss / iter_per_epoch,
+                                                'val loss': val_loss / iter_per_epoch}, epoch)
         print('FINISH.')
