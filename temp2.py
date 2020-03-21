@@ -16,6 +16,7 @@ from models.ae_middle_selu import AEMiddleSelu
 from models.ae_simple import AESimple
 from models.unet_undercomplete import UNetUndercomplete
 from models.wave_ae import WaveAE
+from models.wave_ae_shallow import WaveAEShallow
 from models.wave_unet import WaveUnet
 from solvers.solver import Solver
 from utils import create_hdf5, get_audio_list, train_val_split, create_noisy_clip_dir
@@ -26,6 +27,6 @@ testlist = [1, 2, 8 ,3, 4, 5,6]
 print(testlist[len(testlist)-2::-1])
 
 
-model = WaveAE ()
+model = WaveAEShallow()
 print(model)
 summary(model,(1,16384))
