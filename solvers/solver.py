@@ -91,9 +91,9 @@ class Solver():
                 loss = self.loss_func(outputs, labels)
                 val_loss += loss.item()
 
-                inputs = inputs.detach().numpy()
-                outputs = outputs.detach().numpy()
-                labels = labels.detach().numpy()
+                inputs = inputs.cpu().detach().numpy()
+                outputs = outputs.cpu().detach().numpy()
+                labels = labels.cpu().detach().numpy()
                 for j in range(len(inputs)):
                     stoi_clean_noisy += stoi(labels[j][0], inputs[j][0], fs_sig=16000)
                     stoi_clean_output += stoi(labels[j][0], outputs[j][0], fs_sig=16000)
