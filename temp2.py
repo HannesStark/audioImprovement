@@ -23,10 +23,10 @@ from utils import create_hdf5, get_audio_list, train_val_split, create_noisy_cli
 import soundfile as sf
 from scipy.signal import stft
 
-testlist = [1, 2, 8 ,3, 4, 5,6]
-print(testlist[len(testlist)-2::-1])
-
-
 model = WaveAEShallow()
 print(model)
-summary(model,(1,16384))
+summary(model, (1, 16384))
+
+noise_dataset = AudioDataset("F:/datasets/Nonspeech_SR16000")
+create_hdf5("F:/datasets/libri_speech_subset", noise_dataset, segment_length=16384)
+create_noisy_clip_dir("F:/datasets/libri_speech_subset", noise_dataset)

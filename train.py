@@ -42,8 +42,8 @@ audios_with_val_noise = SegmentsDataset(speech_dir=data_path_speech, segment_len
                                         transform=transforms.Compose(
                                             [Normalize(), NoiseTransform(val_noise), ToTensor()]))
 
-audios_with_train_noise = Subset(audios_with_train_noise, np.arange(0,300))
-audios_with_val_noise = Subset(audios_with_val_noise, np.arange(0,300))
+audios_with_train_noise = Subset(audios_with_train_noise, np.arange(0,100))
+audios_with_val_noise = Subset(audios_with_val_noise, np.arange(0,100))
 
 train_indices, val_indices = disjoint_indices(len(audios_with_train_noise), 0.8, random=True)
 
@@ -53,10 +53,10 @@ val_data = Subset(audios_with_val_noise, val_indices)
 train_loader = torch.utils.data.DataLoader(train_data, batch_size=30, shuffle=True, num_workers=0)
 val_loader = torch.utils.data.DataLoader(val_data, batch_size=30, shuffle=False, num_workers=0)
 
-model = WaveAE()
+model = SuperSimple()
 
-solver = Solver(optim_args={"lr": 1e-3, "weight_decay": 0}, loss_func=torch.nn.L1Loss(), create_plots=True)
-solver.train(model, train_loader, val_loader, log_nth=1, num_epochs=10)
+solver = Solver(optim_args={"lr": 1e-3, "weight_decay": 0}, loss_func=torch.nn.L1Loss())
+solver.train(model, train_loader, val_loader, log_nth=1, num_epochs=10, tensorboard_plots=3)
 
 model_name = model.__class__.__name__ + ''
 model.save('saved/' + model_name + str(segment_length) + '.model')
