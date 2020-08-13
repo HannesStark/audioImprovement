@@ -3,3 +3,6 @@ audio
 .model
 saved
 runs
+.idea
+__pycache__/
+saved
